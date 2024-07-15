@@ -15,7 +15,7 @@ function run(trigger, scope, data, config, callback) {
         } else {
             //Notification formatted in Markdown for pretty notifications
             var notificationText = `*${data.agency} - ${data.alias}*\n` + 
-                                    `Message: ${data.message}`;
+                                    `Message: ${data.message.replace(/([_*#])/g, '\\$1')}`; // Escape certain MD special characters in the message so TG API does not get confused
             
             t.sendMessage({
                 chat_id: tConf.chat,
